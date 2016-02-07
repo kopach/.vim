@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/igor/projects/my/learning/angularjs'
+let g:netrw_dirhist_2='/home/igor/projects/my/learning'
+let g:netrw_dirhist_3='/home/igor/projects/my/learning/angularjs'
+let g:netrw_dirhist_4='/home/igor/projects/my/learning'
+let g:netrw_dirhist_5='/home/igor/projects/my/learning/angular-form'
+let g:netrw_dirhist_6='/home/igor/projects/my/learning/angular-form/bower_components'
+let g:netrw_dirhist_7='/home/igor/projects/my/learning/angular-form'
+let g:netrw_dirhist_8='/home/igor/projects/my/learning/angular-form/bower_components'
+let g:netrw_dirhist_9='/home/igor/projects/my/learning/angular-form/bower_components/angular-schema-form'
