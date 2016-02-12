@@ -99,15 +99,11 @@ inoremap <S-Tab> <c-p>
 "Disable Ex mode
 map Q <Nop>
 
-" CTRL-X for Cut
-vnoremap <C-X> "+x
-
-" CTRL-C for Copy
+" CTRL-C for Copy (visual mode)
 vnoremap <C-C> "+y
 
-" CTRL-V for Paste
-map <C-V> "+gP
-cmap <C-V> <C-R>+
+" CTRL-V for Paste (insert mode)
+inoremap <C-V> <Esc>"+gPi
 
 " THINGS TODO ON NEW INSTALL
 "
