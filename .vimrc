@@ -104,7 +104,7 @@ map Q <Nop>
 vnoremap <C-C> "+y
 
 " CTRL-V for Paste (insert mode)
-inoremap <C-V> <Esc>"+gPi
+inoremap <C-V> <Esc>"+gpi
 
 " THINGS TODO ON NEW INSTALL
 "
