@@ -102,9 +102,15 @@ map Q <Nop>
 
 " CTRL-C for Copy (visual mode)
 vnoremap <C-C> "+y
-
 " CTRL-V for Paste (insert mode)
 inoremap <C-V> <Esc>"+gpi
+
+" Copy filename to clipboard
+noremap <silent> <F8> :let @+=expand("%:t")<CR>
+" Copy relative file path to clipboard
+noremap <silent> <F7> :let @+=expand("%")<CR>
+" Copy full file path to clipboard
+noremap <silent> <F6> :let @+=expand("%:p")<CR>
 
 " THINGS TODO ON NEW INSTALL
 "
