@@ -6,7 +6,7 @@ call vundle#begin()
 
 " Define bundles via Github repos
 				"Plugin manager
-Bundle 'gmarik/vundle'
+Bundle 'VundleVim/Vundle.vim'
 				"File tree
 Bundle 'scrooloose/nerdtree'
 				"Status line
