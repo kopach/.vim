@@ -26,6 +26,7 @@ Bundle 'surround.vim'
 Bundle 'rking/ag.vim'
 				" Text formatter
 Bundle 'Chiel92/vim-autoformat'
+Bundle 'terryma/vim-multiple-cursors'
 				" Color schemes
 Bundle 'Lokaltog/vim-distinguished'
 
@@ -61,6 +62,15 @@ let g:syntastic_check_on_wq = 0
 " Autoformat
 let g:formatterpath = ['jscs']
 noremap <F4> :Autoformat<CR>
+
+" Multiple cursors
+let g:multi_cursor_use_default_mapping=0 " Disable default keys mapping
+" New mapping
+let g:multi_cursor_start_key='<C-n>'
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<C-c>'
 
 " The Silver Searcher (Ag)
 if executable('ag')
