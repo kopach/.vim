@@ -24,6 +24,8 @@ Bundle 'repeat.vim'
 Bundle 'visualrepeat'
 Bundle 'surround.vim'
 Bundle 'rking/ag.vim'
+				" Text formatter
+Bundle 'Chiel92/vim-autoformat'
 				" Color schemes
 Bundle 'Lokaltog/vim-distinguished'
 
@@ -55,6 +57,10 @@ let g:syntastic_css_checkers = ['csslint']
 " let g:syntastic_auto_loc_list = 1 "Auto open list of errors in separate split
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Autoformat
+let g:formatterpath = ['jscs']
+noremap <F4> :Autoformat<CR>
 
 " The Silver Searcher (Ag)
 if executable('ag')
