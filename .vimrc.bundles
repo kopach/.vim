@@ -49,7 +49,7 @@ map <F10> :NERDTreeToggle<CR>
 map <F9> :NERDTreeFind<CR>
 
 " Syntastic
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jshint'] "['jshint', 'jscs']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_less_checkers = ['lessc']
 let g:syntastic_css_checkers = ['csslint']
@@ -61,7 +61,7 @@ let g:syntastic_check_on_wq = 0
 
 " Autoformat
 let g:formatterpath = ['jscs']
-noremap <F4> :Autoformat<CR>
+noremap <F5> :Autoformat<CR>
 
 " Multiple cursors
 let g:multi_cursor_use_default_mapping=0 " Disable default keys mapping
