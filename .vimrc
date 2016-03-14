@@ -99,8 +99,8 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <S-Tab> <c-p>
 
-"Disable Ex mode
-map Q <Nop>
+"Disable Ex mode; remap it to quit the current window.
+map Q :q<CR>
 
 " CTRL-C for Copy (visual mode)
 vnoremap <C-C> "+y
