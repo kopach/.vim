@@ -64,7 +64,6 @@ map <Leader>gp :Gpush<CR>
 
 "Other
 set showcmd "Show (partial) command in the last line of the screen.
-set mouse=a "Enable mouse
 
 set splitbelow "Put new split panel below the current one |:split
 set splitright "Put new split panel rigth the current one |:vsplit
