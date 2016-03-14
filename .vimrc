@@ -26,6 +26,7 @@ set tabstop=2 "Number of spaces for <Tab>d
 set softtabstop=2 "Number of spaces for <Tab> in isert mode
 set shiftwidth=2 "Number of spaces used when >> or << pressed
 set shiftround "Round indent to tabstop when >> or << pressed
+set nowrap "Long lines will not wrap and only part of long lines will be displayed
 
 function ToggleIndentType() "Toggling between spaces and tabs indentation
   if &expandtab
