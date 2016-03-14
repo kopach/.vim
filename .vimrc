@@ -13,6 +13,8 @@ set ignorecase "Ignore case when search
 set smartcase "Ignore case when the pattern contains lowercase letters only
 set incsearch "Do incremental searching - to to result once typed
 set hlsearch  "Highlight found matches
+" Disable search highlighting until the next search (NORMAL MODE)
+nnoremap <CR> :noh<CR><CR>
 
 "Load plugins
 if filereadable(expand("~/.vimrc.bundles"))
