@@ -9,6 +9,10 @@ call vundle#begin()
 Bundle 'VundleVim/Vundle.vim'
 				"File tree
 Bundle 'scrooloose/nerdtree'
+				" Open non text files from nerdtree with an appropriate application.
+Bundle 'aufgang001/vim-nerdtree_plugin_open'
+				"A plugin for NERDTree showing git status flags
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 				"Status line
 Bundle 'bling/vim-airline'
 				"Useful commenting
@@ -17,8 +21,15 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-fugitive'
 				"Syntax checking plugin / also style checking
 Bundle 'scrooloose/syntastic'
-				" Open non text files from nerdtree with an appropriate application.
-Bundle 'aufgang001/vim-nerdtree_plugin_open'
+				" Shows a git diff in the 'gutter' (sign column)
+Bundle 'airblade/vim-gitgutter'
+				" Provides useful mappings which allow to move between Vim panes and tmux splits seamlessly
+Bundle 'christoomey/vim-tmux-navigator'
+				" Base 16 color themes
+Bundle 'chriskempson/base16-vim'
+				" tmux integration for vim
+Bundle 'benmills/vimux'
+
 Bundle 'kien/ctrlp.vim'
 Bundle 'repeat.vim'
 Bundle 'visualrepeat'
@@ -27,8 +38,10 @@ Bundle 'rking/ag.vim'
 				" Text formatter
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'terryma/vim-multiple-cursors'
-				" Color schemes
-Bundle 'Lokaltog/vim-distinguished'
+
+				" Allows to use .editorconfig
+Bundle 'editorconfig/editorconfig-vim'
+
 
 "CtrlP settings
 let g:ctrlp_map = '<c-p>'
@@ -59,6 +72,12 @@ let g:syntastic_css_checkers = ['csslint']
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+" Vimux settings
+nmap <leader>nrs :call VimuxRunCommand('npm run serve')<cr>
+nmap <leader>nrsm :call VimuxRunCommand('npm run serve:mock')<cr>
+nmap <leader>nrt :call VimuxRunCommand('npm run tdd')<cr>
+nmap <leader>nrb :call VimuxRunCommand('npm run build')<cr>
+
 " Autoformat
 let g:formatterpath = ['jscs']
 noremap <F5> :Autoformat<CR>
@@ -86,8 +105,9 @@ endif
 
 " Search word under cursor
 nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
 " Open search dialog
-map <F3> :Ag! 
+map <F3> :Ag!
 
 " Configure NerdtreePluginOpen
 let g:nerdtree_plugin_open_cmd = 'gnome-open'
@@ -173,5 +193,9 @@ endfunction
 " neocomplete.vim
 " vim-autoformat
 " vim-easy-align
-" vim-gitgutter
 " vim-json
+
+
+" Highlight words under the cursor like many IDEs
+" autocmd CursorMoved * silent! exe printf('match IncSearch /\<%s\>/', expand('<cword>'))
+
