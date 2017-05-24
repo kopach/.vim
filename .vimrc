@@ -13,8 +13,9 @@ set ignorecase "Ignore case when search
 set smartcase "Ignore case when the pattern contains lowercase letters only
 set incsearch "Do incremental searching - to to result once typed
 set hlsearch  "Highlight found matches
-" Disable search highlighting until the next search (NORMAL MODE)
-nnoremap <CR> :noh<CR><CR>
+" Disable search highlighting until the next search (NORMAL MODE) by double
+" <ESCAPE>
+nnoremap <silent> <Esc><Esc> :nohlsearch<CR>
 
 "Load plugins
 if filereadable(expand("~/.vimrc.bundles"))
@@ -46,6 +47,7 @@ set laststatus=2 " Always show the statusline
 set encoding=utf-8 "To show Unicode glyphs"
 
 " Style
+syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 colorscheme base16-default
@@ -53,14 +55,21 @@ set background=dark
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 
+" Configs to work with ukrainian keyboard (cyrilic)
+set keymap=uk " Taken from ~./vim/keymap/uk.vim
+set iminsert=0 " English locale by default
+set imsearch=0 " English locale by default
+
 " change color of tabs
 autocmd TabEnter * hi TabLineSel ctermbg=brown
 autocmd TabEnter * hi TabLineSel ctermfg=white
 
 " Leader Mappings
 map <Space> <leader>
-":update is Like ":write", but only write when the buffer has been modified
+":update is Like ':write', but only write when the buffer has been modified
 map <Leader>w :update<CR>
+":edit without parameters reloads file
+map <Leader>e :edit<CR>
 map <Leader>q :qall<CR>
 
 map <Leader>ga :Git add %:p<CR><CR>
@@ -77,6 +86,8 @@ map <Leader>gs :Gstatus<CR>
 "Other
 set showcmd "Show (partial) command in the last line of the screen.
 
+set wildmenu " Display all commands/search matchings in line
+
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow "Put new split panel below the current one |:split
 set splitright "Put new split panel rigth the current one |:vsplit
@@ -86,13 +97,16 @@ set ttimeout
 set ttimeoutlen=20
 set notimeout
 
+" Let backspace delete characters which were typed not during current insert mode session
+set backspace=indent,eol,start
+
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" Quicker window movement
+" Quick navigation between splits
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
@@ -101,19 +115,13 @@ nnoremap <C-l> <C-w>l
 "Disable Ex mode; remap it to quit the current window/tab.
 map Q :q<CR>
 
-" Auto completion by <Tab> when typing
-" will insert tab at beginning of line, will use completion if not at beginning
-set wildmode=list:longest,list:full "Completion mode
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-n>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-p>
+" Automatically add extension to the files when jumping between them or autocomplete them
+set suffixesadd+=.js
+" Autocomplete by words in file (the same as Ctr+n would normaly do )
+inoremap <C-L> <C-X><C-N>
+
+" Use system register for clipboard (Tested on Mac)
+set clipboard=unnamed
 
 " CTRL-C for Copy (VISUAL MODE)
 vnoremap <C-C> "+y
@@ -131,6 +139,7 @@ noremap <silent> <F6> :let @+=expand("%:p")<CR>
 "
 " the_silver_searcher for rking/ag.vim
 "
+" Ubuntu
 " git clone https://github.com/ggreer/the_silver_searcher.git
 " cd the_silver_searcher
 " sudo apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev
@@ -138,6 +147,9 @@ noremap <silent> <F6> :let @+=expand("%:p")<CR>
 " sudo make install
 " cd ../
 " rm -rf the_silver_searcher
+"
+" OS X
+" brew install the_silver_searcher
 
 " To Investigate
 

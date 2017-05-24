@@ -29,6 +29,8 @@ Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'chriskempson/base16-vim'
 				" tmux integration for vim
 Bundle 'benmills/vimux'
+				" JavaScript Syntax highlighting with ES6 support
+Bundle 'othree/yajs.vim'
 
 Bundle 'kien/ctrlp.vim'
 Bundle 'repeat.vim'
@@ -38,6 +40,10 @@ Bundle 'rking/ag.vim'
 				" Text formatter
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'terryma/vim-multiple-cursors'
+
+
+				" Allows convert text into different cases: camelCase, snake_case, etc
+Bundle 'tpope/vim-abolish'
 
 				" Allows to use .editorconfig
 Bundle 'editorconfig/editorconfig-vim'
@@ -110,7 +116,8 @@ nnoremap K :Ag! "\b<C-R><C-W>\b"<CR>:cw<CR>
 map <F3> :Ag!
 
 " Configure NerdtreePluginOpen
-let g:nerdtree_plugin_open_cmd = 'gnome-open'
+" let g:nerdtree_plugin_open_cmd = 'gnome-open'
+let g:nerdtree_plugin_open_cmd = 'open'
 
 "Move the tab to the left
 " map <C-H> :execute "tabmove" tabpagenr() - 2 <CR>
@@ -119,6 +126,7 @@ let g:nerdtree_plugin_open_cmd = 'gnome-open'
 
 autocmd BufRead,BufNewFile *.less set filetype=less " it is need for Syntastic ( try :SyntasticInfo )
 autocmd BufRead,BufNewFile *.less set syntax=css "  enable css syntax in *.less files
+autocmd BufRead,BufNewFile *.scss set filetype=scss " it is need for Syntastic ( try :SyntasticInfo )
 
 " Rename tabs to show tab number
 set tabline=%!MyTabLine()
