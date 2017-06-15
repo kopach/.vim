@@ -119,6 +119,10 @@ map Q :q<CR>
 set suffixesadd+=.js
 " Autocomplete by words in file (the same as Ctr+n would normaly do )
 inoremap <C-L> <C-X><C-N>
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
 
 " Use system register for clipboard (Tested on Mac)
 set clipboard=unnamed
