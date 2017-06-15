@@ -76,6 +76,10 @@ Plugin 'posva/vim-vue'
 				" Search and replace a pattern across multiple files interactively
 Plugin 'yegappan/greplace'
 
+				" A parser for a condensed HTML format, simmilar to zen codding
+				" (Ctrl+E in insert mode)
+Plugin 'rstacruz/sparkup'
+
 " VimVue config
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
