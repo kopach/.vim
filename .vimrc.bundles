@@ -35,18 +35,105 @@ Bundle 'othree/yajs.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'repeat.vim'
 Bundle 'visualrepeat'
-Bundle 'surround.vim'
+				" Adds ability to surrond anything by quotes or tags
+Bundle 'tpope/vim-surround'
 Bundle 'rking/ag.vim'
 				" Text formatter
 Bundle 'Chiel92/vim-autoformat'
 Bundle 'terryma/vim-multiple-cursors'
 
+				" Easy navigate through document
+Bundle 'easymotion/vim-easymotion'
+
+				" Markdown previews from VIm!
+Bundle 'shime/vim-livedown'
 
 				" Allows convert text into different cases: camelCase, snake_case, etc
 Bundle 'tpope/vim-abolish'
 
 				" Allows to use .editorconfig
 Bundle 'editorconfig/editorconfig-vim'
+
+				" Snippents list for snipmate or ultisnips
+Plugin 'honza/vim-snippets'
+				" Snippents engine, works fine with youcompleteme
+Plugin 'SirVer/ultisnips'
+
+				" JSDoc generator
+Plugin 'heavenshell/vim-jsdoc'
+				" Browse the tags of the current file and get an overview of its structure
+" Plugin 'majutsushi/tagbar'
+				" JavaScript parser (needed for tagbar)
+" Plugin 'ternjs/tern_for_vim'
+				" A code-completion engine for Vim
+Plugin 'valloric/youcompleteme'
+				" Zoom in/out of windows/splits
+Plugin 'regedarek/ZoomWin'
+
+				" Vue.js syntax
+Plugin 'posva/vim-vue'
+
+				" Search and replace a pattern across multiple files interactively
+Plugin 'yegappan/greplace'
+
+" VimVue config
+" autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+" EasyMotion settings
+map <Leader> <Plug>(easymotion-prefix)
+
+" ZoomWin config
+nmap <F11> :ZoomWin<CR>
+
+" Youcompleteme settings
+" suggests completion by Alt+Space
+let g:ycm_key_invoke_completion = '<A-Space>'
+" close Preview window after exit insert mode
+let g:ycm_autoclose_preview_window_after_insertion = 1
+
+" Tagbar config
+nmap <F12> :TagbarToggle<CR>
+" Tagbar css+scss config
+let g:tagbar_type_css = {
+\ 'ctagstype' : 'css',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 's:selectors',
+        \ 'i:identities'
+    \ ]
+\ }
+let g:tagbar_type_scss = g:tagbar_type_css
+
+" JSDoc settings
+map <Leader>js :JsDoc<CR><CR>
+" Allow prompt for interactive input.
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 1
+" let g:jsdoc_additional_descriptions = 1
+" let g:jsdoc_access_descriptions = 1
+let g:jsdoc_underscore_private = 1
+let g:jsdoc_enable_es6 = 1
+
+"Markdown settings
+autocmd BufNewFile,BufReadPost *.ngdoc set filetype=markdown
+" let vim_markdown_preview_hotkey='<C-m>'
+nmap gm :LivedownToggle<CR>
+"
+" should markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+
+" should the browser window pop-up upon previewing
+let g:livedown_open = 0
+
+" the port on which Livedown server will run
+let g:livedown_port = 1337
+
+" the system command to launch a browser (ex. on linux)
+" let g:livedown_browser = firefox
+
+" the system command to launch a browser (ex. on OSX)
+" let g:livedown_browser = "open /Applications/Chromium.app"
+" let g:livedown_browser = "safari"
 
 
 "CtrlP settings
@@ -62,13 +149,19 @@ Bundle 'Valloric/MatchTagAlways'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+"SnipMate settings
+" Enable snippets from custom-snippets/UltiSnips/
+autocmd FileType javascript UltiSnipsAddFiletypes es6-jasmine
+" Tell UltiSnips whe to find custom snippets
+set runtimepath+=~/.vim/custom-snippets
+
 " Toggle NERDTree
 map <F10> :NERDTreeToggle<CR>
 " Current file in NERDTree
 map <F9> :NERDTreeFind<CR>
 
 " Syntastic
-let g:syntastic_javascript_checkers = ['jshint'] "['jshint', 'jscs']
+let g:syntastic_javascript_checkers = ['eslint'] "['jshint', 'jscs']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_less_checkers = ['lessc']
 let g:syntastic_css_checkers = ['csslint']
@@ -79,10 +172,16 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Vimux settings
-nmap <leader>nrs :call VimuxRunCommand('npm run serve')<cr>
-nmap <leader>nrsm :call VimuxRunCommand('npm run serve:mock')<cr>
-nmap <leader>nrt :call VimuxRunCommand('npm run tdd')<cr>
-nmap <leader>nrb :call VimuxRunCommand('npm run build')<cr>
+"nmap <leader>nrs :call VimuxRunCommand('npm run serve')<cr>
+"nmap <leader>nrsm :call VimuxRunCommand('npm run serve:mock')<cr>
+"nmap <leader>nt :call VimuxRunCommand('npm run tdd')<cr>
+"nmap <leader>nrb :call VimuxRunCommand('npm run build')<cr>
+ 
+ " Prompt for a command to run
+ "map <Leader>vp :VimuxPromptCommand<CR>
+
+ " Run last command executed by VimuxRunCommand
+"nmap <Leader>vl :VimuxRunLastCommand<CR>
 
 " Autoformat
 let g:formatterpath = ['jscs']

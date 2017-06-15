@@ -67,7 +67,7 @@ autocmd TabEnter * hi TabLineSel ctermfg=white
 " Leader Mappings
 map <Space> <leader>
 ":update is Like ':write', but only write when the buffer has been modified
-map <Leader>w :update<CR>
+map <Leader>u :update<CR>
 ":edit without parameters reloads file
 map <Leader>e :edit<CR>
 map <Leader>q :qall<CR>
