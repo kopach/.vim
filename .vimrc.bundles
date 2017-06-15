@@ -127,7 +127,7 @@ nmap gm :LivedownToggle<CR>
 let g:livedown_autorun = 0
 
 " should the browser window pop-up upon previewing
-let g:livedown_open = 0
+let g:livedown_open = 1
 
 " the port on which Livedown server will run
 let g:livedown_port = 1337
@@ -136,8 +136,7 @@ let g:livedown_port = 1337
 " let g:livedown_browser = firefox
 
 " the system command to launch a browser (ex. on OSX)
-" let g:livedown_browser = "open /Applications/Chromium.app"
-" let g:livedown_browser = "safari"
+let g:livedown_browser = "chromium"
 
 
 "CtrlP settings
