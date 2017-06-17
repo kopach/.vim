@@ -171,8 +171,18 @@ Plug 'vim-scripts/matchit.zip'
 "For tags highlighting
 Plug 'Valloric/MatchTagAlways'
 
+" Enables foldings with better visual presentation for any files automatically
+Plug 'pseewald/vim-anyfold'
+" Easy fod/unfold with Enter or Backspace
+Plug 'arecarn/vim-fold-cycle'
+
 " Initialize plugin system
 call plug#end()
+
+
+" Anyfold settings (folding)
+let anyfold_activate=1
+set foldlevel=99 " set very high fold lever, thus - disable folding once open file
 
 "SnipMate settings
 " Enable snippets from custom-snippets/UltiSnips/
