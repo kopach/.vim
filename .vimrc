@@ -128,9 +128,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 set clipboard=unnamed
 
 " CTRL-C for Copy (VISUAL MODE)
-vnoremap <C-C> "+y
-" CTRL-V for Paste (INSERT MODE)
-inoremap <C-V> <Esc>"+gpi
+" vnoremap <C-C> "+y
+" " CTRL-V for Paste (INSERT MODE)
+" inoremap <C-V> <Esc>"+gpi // Easy clip does the job now
 
 " Copy filename to clipboard
 noremap <silent> <F8> :let @+=expand("%:t")<CR>

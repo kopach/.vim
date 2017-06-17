@@ -47,7 +47,6 @@ Plug 'vim-scripts/visualrepeat'
 Plug 'tpope/vim-surround'
 Plug 'rking/ag.vim'
 				" Text formatter
-Plug 'Chiel92/vim-autoformat'
 Plug 'terryma/vim-multiple-cursors'
 
 				" Easy navigate through document
@@ -105,6 +104,14 @@ Plug 'rstacruz/sparkup'
 " VimVue config
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
+" EasyClip settings
+" adds mew motion with `s` key to substitute text instead of select and paste
+let g:EasyClipUseSubstituteDefaults = 1
+" automatically format after paset - e.g when move from different indent level
+let g:EasyClipAutoFormat = 1
+" CTRL-V for Paste (INSERT MODE)
+imap <c-v> <plug>EasyClipInsertModePaste
+
 " EasyMotion settings
 map <Leader> <Plug>(easymotion-prefix)
 
@@ -160,11 +167,6 @@ let g:livedown_port = 1337
 " the system command to launch a browser (ex. on OSX)
 let g:livedown_browser = "chromium"
 
-
-"CtrlP settings
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
 "For matching tags and more with % key
 Plug 'vim-scripts/matchit.zip'
 
@@ -175,6 +177,9 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'pseewald/vim-anyfold'
 " Easy fod/unfold with Enter or Backspace
 Plug 'arecarn/vim-fold-cycle'
+
+" Simplified clipboard functionality for Vim
+Plug 'svermeulen/vim-easyclip'
 
 " Initialize plugin system
 call plug#end()
@@ -220,18 +225,14 @@ let g:syntastic_check_on_wq = 0
  " Run last command executed by VimuxRunCommand
 "nmap <Leader>vl :VimuxRunLastCommand<CR>
 
-" Autoformat
-let g:formatterpath = ['jscs']
-noremap <F5> :Autoformat<CR>
-
 " Multiple cursors
-let g:multi_cursor_use_default_mapping=0 " Disable default keys mapping
+let g:multi_cursor_use_default_mapping = 0 " Disable default keys mapping
 " New mapping
-let g:multi_cursor_start_key='<C-n>'
+let g:multi_cursor_start_key='<F6>'
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<C-c>'
+let g:multi_cursor_quit_key='<C-w>'
 
 " The Silver Searcher (Ag)
 if executable('ag')
@@ -335,7 +336,6 @@ endfunction
 
 " TODO: investigate this
 " neocomplete.vim
-" vim-autoformat
 " vim-easy-align
 " vim-json
 
