@@ -10,11 +10,11 @@ call plug#begin('~/.vim/plugged')
 				"Plugin manager
 Plug 'VundleVim/Vundle.vim'
 				"File tree
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 				" Open non text files from nerdtree with an appropriate application.
-Plug 'aufgang001/vim-nerdtree_plugin_open'
+Plug 'aufgang001/vim-nerdtree_plugin_open', { 'on':  'NERDTreeToggle' }
 				"A plugin for NERDTree showing git status flags
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 				"Status line
 Plug 'bling/vim-airline'
 				"Useful commenting
@@ -170,6 +170,7 @@ Plug 'vim-scripts/matchit.zip'
 "For tags highlighting
 Plug 'Valloric/MatchTagAlways'
 
+" Initialize plugin system
 call plug#end()
 
 "SnipMate settings
