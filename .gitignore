@@ -1,1 +1,4 @@
 bundle/*
+bundle.bak/*
+plugged/*
+autoload/plug.vim

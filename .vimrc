@@ -50,7 +50,7 @@ set encoding=utf-8 "To show Unicode glyphs"
 syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-colorscheme base16-default
+colorscheme base16-default-dark
 set background=dark
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic

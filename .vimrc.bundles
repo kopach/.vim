@@ -1,84 +1,105 @@
-filetype off
+" Load vim-plug plugin manager if not yet installed
+if empty(glob("~/.vim/autoload/plug.vim"))
+	execute '!curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.github.com/junegunn/vim-plug/master/plug.vim'
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+" Plugins go here
 
 " Define bundles via Github repos
 				"Plugin manager
-Bundle 'VundleVim/Vundle.vim'
+Plug 'VundleVim/Vundle.vim'
 				"File tree
-Bundle 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 				" Open non text files from nerdtree with an appropriate application.
-Bundle 'aufgang001/vim-nerdtree_plugin_open'
+Plug 'aufgang001/vim-nerdtree_plugin_open'
 				"A plugin for NERDTree showing git status flags
-Bundle 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 				"Status line
-Bundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 				"Useful commenting
-Bundle 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 				"Git features
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 				"Syntax checking plugin / also style checking
-Bundle 'scrooloose/syntastic'
+function! InstallSyntasticDeps(info)
+	if a:info.status == 'installed' || a:info.force
+		!npm install -g eslint
+	endif
+endfunction
+Plug 'scrooloose/syntastic', { 'do': function('InstallSyntasticDeps') }
 				" Shows a git diff in the 'gutter' (sign column)
-Bundle 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 				" Provides useful mappings which allow to move between Vim panes and tmux splits seamlessly
-Bundle 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 				" Base 16 color themes
-Bundle 'chriskempson/base16-vim'
+Plug 'chriskempson/base16-vim'
 				" tmux integration for vim
-Bundle 'benmills/vimux'
+Plug 'benmills/vimux'
 				" JavaScript Syntax highlighting with ES6 support
-Bundle 'othree/yajs.vim'
+Plug 'othree/yajs.vim'
 
-Bundle 'kien/ctrlp.vim'
-Bundle 'repeat.vim'
-Bundle 'visualrepeat'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/visualrepeat'
 				" Adds ability to surrond anything by quotes or tags
-Bundle 'tpope/vim-surround'
-Bundle 'rking/ag.vim'
+Plug 'tpope/vim-surround'
+Plug 'rking/ag.vim'
 				" Text formatter
-Bundle 'Chiel92/vim-autoformat'
-Bundle 'terryma/vim-multiple-cursors'
+Plug 'Chiel92/vim-autoformat'
+Plug 'terryma/vim-multiple-cursors'
 
 				" Easy navigate through document
-Bundle 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 				" Markdown previews from VIm!
-Bundle 'shime/vim-livedown'
+Plug 'shime/vim-livedown'
 
-				" Allows convert text into different cases: camelCase, snake_case, etc
-Bundle 'tpope/vim-abolish'
+				" Allows convert text into different cases (Coercion): camelCase, snake_case, etc
+				" also allows to create abbreviations
+Plug 'tpope/vim-abolish'
 
 				" Allows to use .editorconfig
-Bundle 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
 				" Snippents list for snipmate or ultisnips
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 				" Snippents engine, works fine with youcompleteme
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 				" JSDoc generator
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'heavenshell/vim-jsdoc'
 				" Browse the tags of the current file and get an overview of its structure
-" Plugin 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
+
 				" JavaScript parser (needed for tagbar)
-" Plugin 'ternjs/tern_for_vim'
+" function! BuildTern(info)
+"   if a:info.status == 'installed' || a:info.force
+"     !npm install
+"   endif
+" endfunction
+" Plug 'marijnh/tern_for_vim', { 'do': function('BuildTern') }
+" Plug 'ternjs/tern_for_vim'
+
 				" A code-completion engine for Vim
-Plugin 'valloric/youcompleteme'
+function! BuildYCM(info)
+	if a:info.status == 'installed' || a:info.force
+		!./install.sh
+	endif
+endfunction
+Plug 'valloric/youcompleteme', { 'do': function('BuildYCM') }
 				" Zoom in/out of windows/splits
-Plugin 'regedarek/ZoomWin'
+Plug 'regedarek/ZoomWin'
 
 				" Vue.js syntax
-Plugin 'posva/vim-vue'
+Plug 'posva/vim-vue'
 
 				" Search and replace a pattern across multiple files interactively
-Plugin 'yegappan/greplace'
+Plug 'yegappan/greplace'
 
 				" A parser for a condensed HTML format, simmilar to zen codding
 				" (Ctrl+E in insert mode)
-Plugin 'rstacruz/sparkup'
+Plug 'rstacruz/sparkup'
 
 " VimVue config
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
@@ -144,13 +165,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 "For matching tags and more with % key
-Bundle 'matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 "For tags highlighting
-Bundle 'Valloric/MatchTagAlways'
+Plug 'Valloric/MatchTagAlways'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
 
 "SnipMate settings
 " Enable snippets from custom-snippets/UltiSnips/
