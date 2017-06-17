@@ -24,7 +24,7 @@ Plug 'tpope/vim-fugitive'
 				"Syntax checking plugin / also style checking
 function! InstallSyntasticDeps(info)
 	if a:info.status == 'installed' || a:info.force
-		" Fast version of eslint
+		" Fast version of eslint (ulses local eslint by default if provided)
 		!npm install -g eslint_d
 	endif
 endfunction
