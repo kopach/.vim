@@ -27,7 +27,7 @@ set tabstop=2 "Number of spaces for <Tab>d
 set softtabstop=2 "Number of spaces for <Tab> in isert mode
 set shiftwidth=2 "Number of spaces used when >> or << pressed
 set shiftround "Round indent to tabstop when >> or << pressed
-set nowrap "Long lines will not wrap and only part of long lines will be displayed
+" set nowrap "Long lines will not wrap and only part of long lines will be displayed
 
 function ToggleIndentType() "Toggling between spaces and tabs indentation
   if &expandtab
@@ -51,7 +51,8 @@ syntax on
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
 colorscheme base16-default-dark
-set background=dark
+" colorscheme OceanicNext
+" set background=dark
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 
@@ -138,6 +139,18 @@ noremap <silent> <F8> :let @+=expand("%:t")<CR>
 noremap <silent> <F7> :let @+=expand("%")<CR>
 " Copy full file path to clipboard
 noremap <silent> <F6> :let @+=expand("%:p")<CR>
+
+
+" Integrate ranger file explorer to vim
+function RangerExplorer()
+	exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+	if filereadable('/tmp/vim_ranger_current_file')
+		exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+		call system('rm /tmp/vim_ranger_current_file')
+	endif
+	redraw!
+endfun
+map <Leader>x :call RangerExplorer()<CR>
 
 " THINGS TODO ON NEW INSTALL
 "
