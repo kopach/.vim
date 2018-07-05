@@ -8,6 +8,12 @@ set history=500 "Remember history of commands up to this number
 set ttyfast "Improves smoothness of redrawing
 set lazyredraw "Do not redraw screen  while executing macros
 
+" Mouse
+set mouse=a
+nmap <LeftMouse> <nop>
+imap <LeftMouse> <nop>
+vmap <LeftMouse> <nop>
+
 " Search
 set ignorecase "Ignore case when search
 set smartcase "Ignore case when the pattern contains lowercase letters only
@@ -36,9 +42,9 @@ function ToggleIndentType() "Toggling between spaces and tabs indentation
     set expandtab
   endif
 endfunction
-nmap <F4> mz:execute ToggleIndentType()<CR>'z
+nmap <F4> execute ToggleIndentType()<CR>
 
-set list listchars=tab:>-,trail:~,nbsp:· "Show tabs and extra whitespace
+set list listchars=tab:\>\ ,trail:~,nbsp:· "Show tabs and extra whitespace
 set cursorline "Highlight the line with the cursor
 set number "Print the line number in front of each line.
 set relativenumber "Show the line number relative to the line with the cursor
@@ -47,11 +53,16 @@ set laststatus=2 " Always show the statusline
 set encoding=utf-8 "To show Unicode glyphs"
 
 " Style
-syntax on
-let base16colorspace=256  " Access colors present in 256 colorspace"
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-colorscheme base16-default-dark
+" syntax on
+" let base16colorspace=256  " Access colors present in 256 colorspace"
+" set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
+" " colorscheme base16-default-dark
 " colorscheme OceanicNext
+
+syntax enable
+set background=dark
+colorscheme solarized
+
 " set background=dark
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
@@ -82,7 +93,6 @@ map <Leader>go :Git checkout<Space>
 map <Leader>gp :Gpush<CR>
 map <Leader>gpl:Git pull -p<CR>
 map <Leader>gs :Gstatus<CR>
-
 
 "Other
 set showcmd "Show (partial) command in the last line of the screen.
