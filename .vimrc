@@ -42,7 +42,7 @@ function ToggleIndentType() "Toggling between spaces and tabs indentation
     set expandtab
   endif
 endfunction
-nmap <F4> execute ToggleIndentType()<CR>
+nnoremap <F4> <Esc>:execute ToggleIndentType()<CR>
 
 set list listchars=tab:\>\ ,trail:~,nbsp:· "Show tabs and extra whitespace
 set cursorline "Highlight the line with the cursor

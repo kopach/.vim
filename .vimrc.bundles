@@ -22,11 +22,15 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tomtom/tcomment_vim'
 				"Git features
 Plug 'tpope/vim-fugitive'
+				"Extend fugitive.vim to support Bitbucket URLs in :Gbrowse
+Plug 'tommcdo/vim-fubitive'
+
 				"Syntax checking plugin / also style checking
 function! InstallSyntasticDeps(info)
 	if a:info.status == 'installed' || a:info.force
 		" Fast version of eslint (ulses local eslint by default if provided)
 		!npm install -g eslint_d
+		!npm install -g tslint
 	endif
 endfunction
 Plug 'scrooloose/syntastic', { 'do': function('InstallSyntasticDeps') }
@@ -79,8 +83,8 @@ Plug 'HerringtonDarkholme/yats.vim'
 " JSX Syntax highlightinG
 Plug 'mxw/vim-jsx'
 
-				" a Vim Plugin for angular-cli
-Plug 'bdauria/angular-cli.vim'
+" 				" a Vim Plugin for angular-cli
+" Plug 'bdauria/angular-cli.vim'
 
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-repeat'
@@ -98,7 +102,7 @@ Plug 'easymotion/vim-easymotion'
 " smooth scrolling
 Plug 'yuttie/comfortable-motion.vim'
 
-" 
+" The fancy start screen for Vim
 Plug 'mhinz/vim-startify'
 
 				" Markdown previews from VIm!
@@ -134,7 +138,7 @@ Plug 'heavenshell/vim-jsdoc'
 " Plug 'ternjs/tern_for_vim'
 
 				" A code-completion engine for Vim
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --omnisharp-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer && npm install -g typescript' }
 
 " Youcompleteme setup for typescipt
 if !exists("g:ycm_semantic_triggers")
@@ -173,13 +177,13 @@ let g:airline_powerline_fonts = 1
 Plug 'kyuhi/vim-emoji-complete'
 
 				" A Vim plugin for TypeScript
-Plug 'Quramy/tsuquyomi'
+Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
 				" Quramy/tsuquyomi's dependency
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-" angular-cli config
-" Initialize plugin if @angular available in project
-autocmd VimEnter * if globpath('.,..','node_modules/@angular') != '' | call angular_cli#init() | endif
+" " angular-cli config
+" " Initialize plugin if @angular available in project
+" autocmd VimEnter * if globpath('.,..','node_modules/@angular') != '' | call angular_cli#init() | endif
 
 " VimVue config
 " autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
@@ -187,7 +191,7 @@ autocmd VimEnter * if globpath('.,..','node_modules/@angular') != '' | call angu
 " EasyClip settings
 " adds mew motion with `s` key to substitute text instead of select and paste
 let g:EasyClipUseSubstituteDefaults = 1
-" automatically format after paset - e.g when move from different indent level
+" automatically format after paste - e.g when move from different indent level
 let g:EasyClipAutoFormat = 1
 " CTRL-V for Paste (INSERT MODE)
 imap <c-v> <plug>EasyClipInsertModePaste
@@ -269,7 +273,15 @@ Plug 'Olical/vim-enmasse'
 " this will install fzf and will make fzf work with history: https://github.com/junegunn/fzf.vim/issues/290#issuecomment-303076880
 let g:fzf_install = './install --all && if [ -z ${FZF_DEFAULT_OPTS+x} ]; then echo "export FZF_DEFAULT_OPTS=\"--history=$HOME/.fzf_history\"" >> ~/.zshrc; fi'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': g:fzf_install }
-Plug 'junegunn/fzf.vim', { 'do': 'brew install ripgrep' }
+Plug 'junegunn/fzf.vim', { 'do': 'brew reinstall ripgrep' }
+
+" Pairs of handy bracket mappings, :cnext, :cprevious, :next, :bprevious, etc
+Plug 'tpope/vim-unimpaired'
+
+" Async Vim/Neovim plugin for showing the number of your outdated plugins
+Plug 'semanser/vim-outdated-plugins'
+" vim-outdated-plugins: Do not show any message if all plugins are up to date
+let g:outdated_plugins_silent_mode = 1
 
 " Initialize plugin system
 call plug#end()
