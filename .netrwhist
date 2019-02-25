@@ -1,11 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/igor/projects/my/learning/angularjs'
-let g:netrw_dirhist_2='/home/igor/projects/my/learning'
-let g:netrw_dirhist_3='/home/igor/projects/my/learning/angularjs'
-let g:netrw_dirhist_4='/home/igor/projects/my/learning'
-let g:netrw_dirhist_5='/home/igor/projects/my/learning/angular-form'
-let g:netrw_dirhist_6='/home/igor/projects/my/learning/angular-form/bower_components'
-let g:netrw_dirhist_7='/home/igor/projects/my/learning/angular-form'
-let g:netrw_dirhist_8='/home/igor/projects/my/learning/angular-form/bower_components'
-let g:netrw_dirhist_9='/home/igor/projects/my/learning/angular-form/bower_components/angular-schema-form'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/Users/ikp/projects/bls/fx/fx.wlt.solutions-js'
+let g:netrw_dirhist_2='/Users/ikp/.config/nvim'
+let g:netrw_dirhist_3='/Applications/Brave.app/Contents/Resources/extensions'
+let g:netrw_dirhist_4='/Users/ikp/projects/bls/fx/audit/tds.mdl.audit-js/src/app/containers/audit-list/reducers'
+let g:netrw_dirhist_5='/Users/ikp/projects/bls/fx/audit/tds.mdl.audit-js'

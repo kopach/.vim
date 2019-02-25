@@ -12,9 +12,12 @@ Plug 'VundleVim/Vundle.vim'
 				"File tree
 Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 				" Open non text files from nerdtree with an appropriate application.
-Plug 'aufgang001/vim-nerdtree_plugin_open', { 'on':  'NERDTreeToggle' }
+Plug 'aufgang001/vim-nerdtree_plugin_open', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
 				"A plugin for NERDTree showing git status flags
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+				"Extra syntax and highlight for nerdtree files
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  ['NERDTreeToggle', 'NERDTreeFind'] }
+
 				"Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -26,14 +29,25 @@ Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fubitive'
 
 				"Syntax checking plugin / also style checking
-function! InstallSyntasticDeps(info)
-	if a:info.status == 'installed' || a:info.force
-		" Fast version of eslint (ulses local eslint by default if provided)
-		!npm install -g eslint_d
-		!npm install -g tslint
-	endif
-endfunction
-Plug 'scrooloose/syntastic', { 'do': function('InstallSyntasticDeps') }
+" function! InstallSyntasticDeps(info)
+" 	if a:info.status == 'installed' || a:info.force
+" 		" Fast version of eslint (ulses local eslint by default if provided)
+" 		!npm install -g eslint_d
+" 		!npm install -g tslint
+" 	endif
+" endfunction
+" Plug 'scrooloose/syntastic', { 'do': function('InstallSyntasticDeps') }
+
+" Asynchronous linting/fixing for Vim and Language Server Protocol (LSP) integration (syntax checker)
+Plug 'w0rp/ale'
+" fixers
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier', 'eslint'],
+\   'typescript': ['prettier', 'tslint'],
+\}
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
 
 Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
@@ -76,9 +90,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'othree/html5.vim'
 				" The most advanced TypeScript Syntax Highlighting
 Plug 'HerringtonDarkholme/yats.vim'
-
-" TypeScript Syntax highlightinG
-" Plug 'leafgarland/typescript-vim'
 
 " JSX Syntax highlightinG
 Plug 'mxw/vim-jsx'
@@ -179,7 +190,13 @@ Plug 'kyuhi/vim-emoji-complete'
 				" A Vim plugin for TypeScript
 Plug 'Quramy/tsuquyomi', { 'do': 'npm install -g typescript' }
 				" Quramy/tsuquyomi's dependency
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'Shougo/vimproc.vim', {'do' : 'make -f make_mac.mak'}
+" disable tsuquyomi on save (otherwise - takes few seconds to save file)
+let g:tsuquyomi_disable_quickfix = 1
+
+nnoremap <silent> <Leader>tgd :TsuDefinition<CR>
+nnoremap <silent> <Leader>tgb :TsuGoBack<CR>
+nnoremap <silent> <Leader>tim :TsuImport<CR>
 
 " " angular-cli config
 " " Initialize plugin if @angular available in project
@@ -283,6 +300,17 @@ Plug 'semanser/vim-outdated-plugins'
 " vim-outdated-plugins: Do not show any message if all plugins are up to date
 let g:outdated_plugins_silent_mode = 1
 
+" Lightning fast left-right movement in Vim
+Plug 'unblevable/quick-scope'
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+" Set custom colors for quick-scope plugin
+augroup qs_colors
+  autocmd!
+  autocmd ColorScheme * highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+  autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+augroup END
+
 " Initialize plugin system
 call plug#end()
 
@@ -330,29 +358,28 @@ map <F10> :NERDTreeToggle<CR>
 " Current file in NERDTree
 map <F9> :NERDTreeFind<CR>
 
-" Syntastic
-let g:syntastic_javascript_checkers = ['eslint'] "['jshint', 'jscs']
-let g:syntastic_javascript_eslint_exec = 'eslint_d' " enable eslint_d for faster checking
-
-let g:syntastic_json_checkers = ['jsonlint']
-let g:syntastic_less_checkers = ['lessc']
-let g:syntastic_css_checkers = ['csslint']
-"Recommended settings https://github.com/scrooloose/syntastic/blob/master/doc/syntastic.txt#L122
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1 "Auto open list of errors in separate split
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" Intergare TypeScript checking with syntastic
-" let g:tsuquyomi_disable_quickfix = 1
-let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint'] " You shouldn't use 'tsc' checker.
+" " Syntastic
+" let g:syntastic_javascript_checkers = ['eslint'] "['jshint', 'jscs']
+" let g:syntastic_javascript_eslint_exec = 'eslint_d' " enable eslint_d for faster checking
+"
+" let g:syntastic_json_checkers = ['jsonlint']
+" let g:syntastic_less_checkers = ['lessc']
+" let g:syntastic_css_checkers = ['csslint']
+" "Recommended settings https://github.com/scrooloose/syntastic/blob/master/doc/syntastic.txt#L122
+" " let g:syntastic_always_populate_loc_list = 1
+" " let g:syntastic_auto_loc_list = 1 "Auto open list of errors in separate split
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+"
+" " Intergare TypeScript checking with syntastic
+" let g:syntastic_typescript_checkers = ['tsuquyomi', 'tslint'] " You shouldn't use 'tsc' checker.
 
 " Vimux settings
 "nmap <leader>nrs :call VimuxRunCommand('npm run serve')<cr>
 "nmap <leader>nrsm :call VimuxRunCommand('npm run serve:mock')<cr>
 "nmap <leader>nt :call VimuxRunCommand('npm run tdd')<cr>
 "nmap <leader>nrb :call VimuxRunCommand('npm run build')<cr>
- 
+
  " Prompt for a command to run
  "map <Leader>vp :VimuxPromptCommand<CR>
 
@@ -404,4 +431,3 @@ autocmd BufRead,BufNewFile *.scss set filetype=scss " it is need for Syntastic (
 
 " Highlight words under the cursor like many IDEs
 " autocmd CursorMoved * silent! exe printf('match IncSearch /\<%s\>/', expand('<cword>'))
-
